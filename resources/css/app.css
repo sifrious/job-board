@@ -8,6 +8,7 @@
     top: 0;
     max-width: 100%;
     overflow: hidden;
+    font-family: 'Poppins';
 }
   
 @media (max-width: 767px) {
