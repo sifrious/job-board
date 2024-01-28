@@ -42,9 +42,6 @@ defineProps({
       </div>
     </div>
   </div>
-  {{ home }}
-  {{ user }}
-  {{ user < 0 }}
 </template>
 
 <!-- <script>

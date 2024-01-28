@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 
