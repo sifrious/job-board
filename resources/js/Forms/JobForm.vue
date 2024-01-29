@@ -1,8 +1,11 @@
 <script setup>
+import OptionalInputLabel from '@/Forms/Components/OptionalInput.vue'
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
+import Checkbox from '@/Components/Checkbox.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import TextAreaInput from '@/Components/TextAreaInput.vue';
 import {Link, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
@@ -49,19 +52,109 @@ const submit = () => {
 </script>
 
 <template>
-    <form @submit.prevent="submit">
-        <!-- <div>
-            <InputLabel for="name" value="Name" />
+    <form @submit.prevent="submit" class="overscroll-contain overflow-scroll">
+
+        <div id="basics-div" class="p-5 mt-5">
+            <h2 class="text-2xl mb-4 border-b-2 border-gray-500">Basics</h2>
+
+            <InputLabel for="title" value="Position Title" />
             <TextInput
-                id="name"
+                id="title"
                 type="text"
                 class="mt-1 block w-full"
-                v-model="form.name"
+                v-model="form.title"
                 required
                 autofocus
-                autocomplete="name"
+                autocomplete="title"
             />
-        </div> -->
+
+            <InputLabel for="organization" value="Organization" />
+            <TextInput
+                id="organization"
+                type="text"
+                class="mt-1 block w-full"
+                v-model="form.organization"
+                autofocus
+                autocomplete="title"
+            />
+
+            <div class="m-2 pb-4 flex flex-row">
+                <div>
+                    <Checkbox id="user_represents_organiaztion" name="user_represents_organization"></Checkbox>
+                </div>
+                <div class="text-xs flex flex-col mx-4">
+                    <InputLabel for="user_represents_organization" value="I Am Currently Employed By Or Hold a Leadership Position In This Organization"></InputLabel>
+                    <p class=" px-2 italic">Leave unchecked if you are posting on behalf of an organization as a recruiter, an agent, or an interested party.</p>
+                </div>
+            </div>
+
+            <InputLabel for="url" value="Listing URL" />
+            <TextInput
+                id="url"
+                type="text"
+                class="mt-1 block w-full"
+                v-model="form.url"
+                autofocus
+                autocomplete="title"
+            />
+
+            <OptionalInputLabel>
+                <InputLabel for="description" value="Description" />
+            </OptionalInputLabel>
+            <TextAreaInput
+                id="description"
+                type="textarea"
+                class="mt-1 h-30 block w-full"
+                v-model="form.description"
+                autofocus
+                autocomplete="description"
+        />
+        </div> 
+        <!-- end basics section -->
+
+        <div id="canidate-div" class="p-5 mt-5">
+            <h2 class="text-2xl mb-4 border-b-2 border-gray-500">
+                The Perfect Canidate
+            </h2>
+        
+            <InputLabel for="" value="Skills" />
+            <InputLabel for="" value="Experience Level" />
+        </div>
+        <!-- end canidate section -->
+
+        <div id="specifics-div" class="p-5 mt-5">
+            <h2 class="text-2xl mb-4 border-b-2 border-gray-500">
+                The Specifics
+            </h2>
+        
+            <h3 class="text-2xl italic border-b-1 border-gray-400">Location</h3>
+            <InputLabel for="" value="Type" />
+            <OptionalInputLabel>
+                <InputLabel for="" value="Address" />
+            </OptionalInputLabel>
+
+            <h3 class="text-2xl italic border-b-1 border-gray-400">Expectations</h3>
+            <InputLabel for="" value="Commitment Type" />
+            <InputLabel for="" value="Salary Range" />
+        </div>
+        <!-- end specifics section -->
+
+        <!-- end basics section -->
+        <div id="contact-div" class="p-5 mt-5">
+            <h2 class="text-2xl mb-4 border-b-2 border-gray-500">
+                Contact
+            </h2>
+        
+            <InputLabel for="contact" value="General Contact Information" />
+            <TextAreaInput
+                id="contact"
+                type="textarea"
+                class="mt-1 h-30 block w-full"
+                v-model="form.contact"
+                autofocus
+                autocomplete="contact"
+            />
+        </div>
         
         <!-- <div class="mt-4">
             <div class="flex flex-row align-baseline">
