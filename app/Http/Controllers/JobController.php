@@ -26,14 +26,19 @@ class JobController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): RedirectResponse
+    public function create()
     {
-        session('redirect_path', '/jobs/new');
+        session(['redirect_path' => '/jobs/new']);
+        // $session_path = session('redirect_path');
+        // $session_info = session()->all();
+        // dump($session_info);
+        // dump($session_path);
+        // dd();
         $user = Auth::user() ?: null;
         if (is_null($user)) {
             return Redirect('/welcome');
         }
-        dd("didn't get redirected");
+        return Inertia::render('Jobs/Create');
 
         // return Inertia::render('/')
     }

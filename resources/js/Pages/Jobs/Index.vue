@@ -6,12 +6,11 @@
         user: {
             type: Number,
             required: true,
+        },
+        status: {
+            type: String,
         }
     })
-
-    const form = useForm({
-        message: '',
-    });
 </script>
 
 <template>

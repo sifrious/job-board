@@ -20,7 +20,7 @@ defineProps({
 <template>
   <div class=" border-b-2 border-grey-50">
     <div class="flex flex-row align-baseline">
-      <Link :href="'/'" class="flex flex-row w-4/5 md:w-2/5 border-2 border-rose-200">
+      <Link :href="'/'" class="flex flex-row w-4/5 md:w-2/5">
         <ApplicationLogo class="w-22 p-2">
 
         </ApplicationLogo>

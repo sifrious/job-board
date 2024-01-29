@@ -12,35 +12,33 @@ const props = defineProps({
     },
 });
 
-const slack_keys = [
-    "name",
-    "email",
-    "nickname",
-    "avatar",
-    "id"
-];
-
-var slack_data = {};
-for (let key of slack_keys) {
-    try {
-        slack_data[key] = (props.slack_data[key]) ? props.slack_data[key]:'';
-    } catch (e) {
-        slack_data[key] = '';
-    }
-    console.log(`${key - slack_data[key]}`);
-}
-
 const form = useForm({
-    name: slack_data.name,
-    email: slack_data.email,
-    nickname: slack_data.nickname,
-    slack_name: slack_data.name,
-    slack_email: slack_data.email,
-    slack_nickname: slack_data.nickname,
-    slack_avatar: slack_data.avatar,
-    slack_id: slack_data.id,
-    password: '',
-    password_confirmation: '',
+    title: '',
+    organization: '',
+    preferred_contact: '',
+    owner: '',
+    creator: '',
+    contact: '',
+    contact_preferences: '',
+    contact_instructions: '',
+    user_represents_organization: '',
+    is_active: '',
+    is_published: '',
+    url: '',
+    url_secondary: '',
+    url_tertiary: '',
+    url_linkedin: '',
+    description: '',
+    position_level: '',
+    location_address: '',
+    location_type: '',
+    comitment_type: '',
+    position_type: '',
+    salary_range_min: '',
+    salary_range_max: '',
+    salary_measure: '',
+    benefits: '',
+    skills: '',
 });
 
 const submit = () => {
@@ -52,9 +50,8 @@ const submit = () => {
 
 <template>
     <form @submit.prevent="submit">
-        <div>
+        <!-- <div>
             <InputLabel for="name" value="Name" />
-
             <TextInput
                 id="name"
                 type="text"
@@ -64,9 +61,9 @@ const submit = () => {
                 autofocus
                 autocomplete="name"
             />
-        </div>
+        </div> -->
         
-        <div class="mt-4">
+        <!-- <div class="mt-4">
             <div class="flex flex-row align-baseline">
                 <InputLabel for="nickname" value="Nickname" class="w-20"/>
                 <div class="inline text-xs font-thin py-0.5 text-center"><span>(Optional)</span></div>
@@ -138,6 +135,6 @@ const submit = () => {
             <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Register
             </PrimaryButton>
-        </div>
+        </div> -->
     </form>
 </template>
