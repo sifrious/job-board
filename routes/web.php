@@ -27,7 +27,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/welcome', [LoginPromptController::class, 'index']);
+Route::get('/welcome', [LoginPromptController::class, 'index'])->name('welcome');
 
 Route::get('/jobs', [JobController::class, 'index']);
 

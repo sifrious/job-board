@@ -5,10 +5,7 @@ import PrimaryButtonLg from "@/Components/PrimaryButtonLg.vue"
 
 
 defineProps({
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
+    failedSlackLogin: {
         type: Boolean,
     },
     laravelVersion: {
@@ -19,10 +16,11 @@ defineProps({
         type: String,
         required: true,
     },
-});
+// });
 </script>
 
 <template>
+    <Head title="Welcome" />
     <NavigationTemplate :home="true" :user="-1"></NavigationTemplate>
     <div class="flex justify-center pt-10 text-center">
         <div class="w-full md:px md:w-4/5 lg:3/5 text-center">

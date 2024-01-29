@@ -2,6 +2,8 @@
     import { Link } from '@inertiajs/vue3';
     import NavigationTemplate from '@/Layouts/NavigationTemplate.vue';
     import NavLinkDiv from '@/Components/PrimaryNavLinkDiv.vue'
+import axios from 'axios';
+
 </script>
 
 <template>
@@ -13,11 +15,11 @@
                 <div class="flex w-11/12 md:w-5/6 p-auto">Job Posts are limited to users authenticated by logging into a Slack account associated with NEPA Tech.</div>
             </div>
             <div class="w-full">
-                <Link :href="'/auth/redirect'" class="flex justify-center text-center">
+                <a :href="'/auth/redirect'" class="flex justify-center text-center" data-visit="true">
                     <div class="m-4 w-1/2 border-2 border-grey-800 rounded-lg bg-gray-200 text-lg font-bold">
                         Login With Slack
                     </div>
-                </Link>
+                </a>
             </div>
             <div class="w-full flex flex-col justify-center items-center text-center">
                 <div class="flex w-11/12 md:w-5/6 p-auto">

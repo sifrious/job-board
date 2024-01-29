@@ -13,10 +13,21 @@ use App\Http\Controllers\Auth\SlackLoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+
+    Route::get('register-slack', [SlackLoginController::class, 'create'])
+        ->name('register.slack');
+
+    Route::post('register-slack', [SlackLoginController::class, 'store']);
+
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
+
+    Route::get('login-slack', [SlackLoginController::class, 'create'])
+        ->name('login-slack');
+
+    Route::post('login-slack', [SlackLoginController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
