@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\User;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -12,10 +15,10 @@ class JobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return Inertia::render('Jobs/Index', []);
+        $user = Auth::user() ? Auth::user()->id : -1;
+        return Inertia::render('Jobs/Index', ['user' => $user]);
     }
 
     /**

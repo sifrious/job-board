@@ -11,13 +11,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function ($table) {
-            $table->string('slack_id');
-            $table->string('slack_nickname');
-            $table->string('slack_email');
-            $table->string('slack_avatar');
-            $table->string('slack_name');
-            $table->string('membership');
-            $table->string('role');
+            $table->string('slack_id')->nullable();
+            $table->string('slack_nickname')->nullable();
+            $table->string('slack_email')->nullable();
+            $table->string('slack_avatar')->nullable();
+            $table->string('slack_name')->nullable();
+            $table->string('membership')->nullable();
+            $table->string('role')->nullable();
         });
     }
 

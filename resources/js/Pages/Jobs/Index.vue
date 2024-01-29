@@ -2,6 +2,13 @@
     import NavigationTemplate from '@/Layouts/NavigationTemplate.vue';
     import {useForm, Head} from '@inertiajs/vue3';
 
+    const props = defineProps({
+        user: {
+            type: Number,
+            required: true,
+        }
+    })
+
     const form = useForm({
         message: '',
     });
@@ -10,7 +17,7 @@
 <template>
     <Head title="Jobs" />
 
-    <NavigationTemplate :user=-1 :home="false">
+    <NavigationTemplate :user=user :home="false">
     </NavigationTemplate>
 
 </template>

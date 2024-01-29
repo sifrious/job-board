@@ -8,15 +8,11 @@ defineProps({
     failedSlackLogin: {
         type: Boolean,
     },
-    laravelVersion: {
-        type: String,
+    user: {
+        type: Number,
         required: true,
     },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
-// });
+});
 </script>
 
 <template>
