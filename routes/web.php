@@ -29,6 +29,7 @@ Route::get('/', function () {
 Route::get('/welcome', [LoginPromptController::class, 'index'])->name('welcome');
 
 Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/jobs/new', [JobController::class, 'create']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

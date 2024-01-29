@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,9 +26,16 @@ class JobController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): RedirectResponse
     {
-        //
+        session('redirect_path', '/jobs/new');
+        $user = Auth::user() ?: null;
+        if (is_null($user)) {
+            return Redirect('/welcome');
+        }
+        dd("didn't get redirected");
+
+        // return Inertia::render('/')
     }
 
     /**

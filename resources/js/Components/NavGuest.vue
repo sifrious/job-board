@@ -3,7 +3,7 @@ import PrimaryNavLinkDiv from './PrimaryNavLinkDiv.vue';
 </script>
 
 <template>
-    <PrimaryNavLinkDiv :href="'/welcome'" :failedSlackLogin="false">Post</PrimaryNavLinkDiv>
+    <PrimaryNavLinkDiv :href="'/jobs/new'" :failedSlackLogin="false">Post</PrimaryNavLinkDiv>
 </template>
 
 
