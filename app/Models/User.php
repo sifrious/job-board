@@ -20,6 +20,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'slack_nickname',
+        'slack_id',
+        'slack_email',
+        'slack_avatar',
+        'slack_name',
+        'role',
+        'membership',
         'password',
     ];
 

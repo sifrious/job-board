@@ -24,10 +24,10 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login-slack', [SlackLoginController::class, 'create'])
-        ->name('login-slack');
+    Route::get('login-slack', [SlackLoginController::class, 'update'])
+        ->name('login.slack');
 
-    Route::post('login-slack', [SlackLoginController::class, 'store']);
+    Route::post('login-slack', [SlackLoginController::class, 'update']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

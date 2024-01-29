@@ -5,14 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\Support\Arr;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -77,49 +70,28 @@ class SlackLoginController extends Controller
 
     public function create(Arr $loginData): Response
     {
-        return Inertia::render('Auth/RegisterSlack', ['slack_data' => session('slack_data')]);
+        $slack_data = session('slack_data');
+        if (!is_null($slack_data)) {
+            $slack_id = session('slack_data')["id"];
+            $user = User::where(['slack_id', "=", $slack_id])->first();
+            dump($slack_id);
+            dump($user);
+            if (!is_null($user)) {
+                dd("okokok");
+            } else {
+                // dd("here");
+                return Inertia::render('Auth/RegisterSlack', ['slack_data' => session('slack_data')]);
+            }
+        } else {
+            dd("failed slack auth");
+        }
     }
 
-    public function store(Arr $loginData, Request $request): RedirectResponse
+    public function update(Request $request): Response
     {
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        return Inertia::render('Auth/LoginSlack', [
+            'CanResetPassword' => true,
+            'status' => "This slack account is already associated with an account",
         ]);
-
-        // override slack nickname
-        $nickname = '';
-        if (!empty($request->nickname)) {
-            $nickname = $request->nickname;
-        } elseif (!empty($request->slack_nickname)) {
-            $nickname = $request->slack_nickname;
-        }
-
-        if ($request->role === '') {
-            $role = 'demo';
-        } else {
-            $role = 'nepatech';
-        }
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'slack_nickname' => $nickname,
-            'slack_id' => $request->slack_id,
-            'slack_email' => $request->slack_email,
-            'slack_avatar' => $request->slack_avatar,
-            'slack_name' => $request->slack_name,
-            'role' => $role,
-            'membership' => 'alpha',
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect('/jobs');
     }
 }

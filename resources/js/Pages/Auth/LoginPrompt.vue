@@ -2,8 +2,6 @@
     import { Link } from '@inertiajs/vue3';
     import NavigationTemplate from '@/Layouts/NavigationTemplate.vue';
     import NavLinkDiv from '@/Components/PrimaryNavLinkDiv.vue'
-import axios from 'axios';
-
 </script>
 
 <template>
