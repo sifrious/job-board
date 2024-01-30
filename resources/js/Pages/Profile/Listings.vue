@@ -8,24 +8,17 @@
             type: Object,
             required: true,
         },
+        listings: {
+            type: Array,
+        }, 
+        flash: {
+            type: Object,
+        },
     })
 </script>
 
 <template>
-    <NavigationTemplate :user=user :home="true">
-        </NavigationTemplate>
-    <Status :title="'New Job Listing'">
-        </Status>
-    <JobCreateLayout :user="user">
-    </JobCreateLayout>
+    {{ user }}
+    {{ listings }}
 </template>
 
-<script>
-export default {
-    props: {
-        user: {
-            type: Number,
-        },
-    },
-}
-</script>

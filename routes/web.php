@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardRoutingController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginPromptController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserListingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,8 +22,6 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    $session_path = session('redirect_path');
-    $session_info = session();
     return Inertia::render('Welcome', [
         'user' => Auth::user() ? Auth::user()->id : -1,
         'failedSlackLogin' => false,
@@ -42,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/jobs/create', [JobController::class, 'store'])->name('jobs.create');
+    Route::get('/user/jobs', [UserListingController::class, 'index'])->name('userlisting.index')->name('user.jobs');
 });
 
 require __DIR__ . '/auth.php';

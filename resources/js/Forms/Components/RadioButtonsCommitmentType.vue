@@ -25,7 +25,7 @@
     </div>
 </template>
   
-  <script setup>
+<script setup>
     import { ref, watch } from 'vue'
     import {
       RadioGroup,
@@ -38,4 +38,4 @@
     watch(position_level, (newVal) => {
         emit('update:modelValue', newVal);
     });
-  </script>
+</script>
