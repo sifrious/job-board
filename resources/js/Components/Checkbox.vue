@@ -22,13 +22,13 @@ const proxyChecked = computed({
         emit('update:checked', val);
     },
 });
+
 </script>
 
 <template>
     <input
         type="checkbox"
         :value="value"
-        v-model="proxyChecked"
         class="border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
     />
 </template>

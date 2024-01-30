@@ -5,10 +5,20 @@
 </script>
 
 <template>
-    <NavigationTemplate :user=user :home="false">
+    <NavigationTemplate :user=user :home="true">
         </NavigationTemplate>
     <Status :title="'New Job Listing'">
         </Status>
-    <JobCreateLayout>
-        </JobCreateLayout>
+    <JobCreateLayout :user="user">
+    </JobCreateLayout>
 </template>
+
+<script>
+export default {
+    props: {
+        user: {
+            type: Number,
+        },
+    },
+}
+</script>
