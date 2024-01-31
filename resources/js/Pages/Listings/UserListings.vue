@@ -1,6 +1,8 @@
 <script setup>
     import NavigationTemplate from '@/Layouts/NavigationTemplate.vue';
     import SparseListing from '@/Components/Listing/SparseListing.vue';
+    
+    
     const props = defineProps({
         user: {
             type: Object,

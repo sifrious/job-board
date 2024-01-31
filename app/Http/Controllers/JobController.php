@@ -83,7 +83,7 @@ class JobController extends Controller
                     ['job_id' => $job->id]
                 ]);
             };
-        } else {
+        } else {`
             dump("added no new skills");
         };
         // Add listing information
