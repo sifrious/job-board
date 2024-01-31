@@ -6,6 +6,7 @@ use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class UserListingController extends Controller
@@ -15,15 +16,20 @@ class UserListingController extends Controller
      */
     public function index()
     {
+        $flash = null;
         $user = Auth::user();
-        $listings = Listing::where([
-            ['user', "=", $user->id]
-        ])->get();
-        dd($listings);
-        return Inertia::render('Profile/Listings', [
+        $listings = DB::table('listings')
+            ->where('creator_id', $user->id)
+            ->orWhere('owner_id', $user->id)
+            ->get();
+        if (!is_null(session('flash_listing'))) {
+            $flash = session('flash_listing');
+            session('flash_listing', null);
+        };
+        return Inertia::render('Listings/UserListings', [
             'user' => $user,
             'listings' => $listings,
-            'flash' => session('flash_listing') ?: null,
+            'flash' => $flash,
         ]);
     }
 

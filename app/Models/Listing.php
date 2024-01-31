@@ -15,18 +15,12 @@ class Listing extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
         'user_represents_organization',
-        'organization',
-        'url',
-        'description',
-        'location_address',
-        'skills',
-        'is_active',
-        'is_published',
         'creator_id',
         'owner_id',
         'preferred_contact',
+        'is_active',
+        'is_published',
         'published_date',
         'removed_date'
     ];
