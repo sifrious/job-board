@@ -16,12 +16,9 @@ class Listing extends Model
      */
     protected $fillable = [
         'user_represents_organization',
-        'creator_id',
         'owner_id',
         'preferred_contact',
         'is_active',
         'is_published',
-        'published_date',
-        'removed_date'
     ];
 }
