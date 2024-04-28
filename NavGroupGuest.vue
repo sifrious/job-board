@@ -3,7 +3,7 @@
         <NavLink href="/jobs" label="Jobs"></NavLink >
         <NavLink href="/about/membership" label="Membership"></NavLink >
         <NavLink href="/about/pricing" label="List Here"></NavLink >
-        <NavLink href="prompt" label="Log In"></NavLink >
+        <NavLink href="/prompt" label="Log In"></NavLink >
     </div>
 </template>
 

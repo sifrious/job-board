@@ -11,8 +11,8 @@ class LoginPromptController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        return inertia('LoginPrompt', []);
+        return Inertia::render('prompt', []);
     }
 }

@@ -29,5 +29,5 @@ class Job extends Model
         'salary_measure',
         'benefits',
         'skills',
-    ]
+    ];
 }

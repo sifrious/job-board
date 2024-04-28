@@ -27,7 +27,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/login-prompt', [LoginPromptController::class, 'index'])->name('login-prompt');
+Route::get('/prompt', [LoginPromptController::class, 'index'])->name('prompt');
 
 Route::get('/jobs', [JobController::class, 'index']);
 Route::get('/jobs/new', [JobController::class, 'create']);

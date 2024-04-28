@@ -1,8 +1,8 @@
 <template>
-    <NavLinkMobile :href="JobsIndex" :label="Jobs"></NavLinkMobile>
-    <NavLinkMobile :href="UserListingsIndex" :label="Listings"></NavLinkMobile>
-    <NavLinkMobile :href="UserDraftsIndex" :label="Drafts"></NavLinkMobile>
-    <NavLinkMobile :href="ListingsIndex" :label="Saved"></NavLinkMobile>
+    <NavLinkMobile href="JobsIndex" label="Jobs"></NavLinkMobile>
+    <NavLinkMobile href="UserListingsIndex" label="Listings"></NavLinkMobile>
+    <NavLinkMobile href="UserDraftsIndex" label="Drafts"></NavLinkMobile>
+    <NavLinkMobile href="ListingsIndex" label="Saved"></NavLinkMobile>
 </template>
 
 <script>

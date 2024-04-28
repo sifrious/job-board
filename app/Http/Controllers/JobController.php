@@ -21,7 +21,18 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
-        return inertia('Jobs/Index', ['user' => Auth::user()]);
+        $jobs = Job::latest()
+                    ->limit(20)
+                    ->get();
+        $user = Auth::user();
+        $user_jobs = null;
+        if ($user) {
+            $user_jobs = Job::where('user_id', $user->id)
+                                ->latest()
+                                ->limit(20)
+                                ->get();
+        }
+        return inertia('Jobs/Index', ['user' => $user, 'jobs' => $jobs, 'user_jobs' => $user_jobs]);
     }
 
     /**
@@ -57,10 +68,10 @@ class JobController extends Controller
         dump($job);
         // Add organization based on job form
         if (!is_null($request->organization)) {
-            $firm = Firm::firstOrCreate([
-                ['name' => $request->organization]
-            ]);
-            dump($firm);
+            // $firm = Firm::firstOrCreate([
+            //     ['name' => $request->organization]
+            // ]);
+            // dump($firm);
         } else {
             dump("did not create firm");
         };
@@ -69,14 +80,14 @@ class JobController extends Controller
             $skills = explode(",", $request->skills);
             foreach ($skills as $skill_str) {
                 $skill_str = str_replace(" ", "", $skill_str);
-                $skill = Skill::firstOrCreate([
-                    ['name' => $skill],
-                ]);
-                $job_skill = JobSkill::firstOrCreate([
-                    ['skill_id' => $skill->id],
-                    ['skill_name' => $skill->name],
-                    ['job_id' => $job->id]
-                ]);
+                // $skill = Skill::firstOrCreate([
+                //     ['name' => $skill],
+                // ]);
+                // $job_skill = JobSkill::firstOrCreate([
+                //     ['skill_id' => $skill->id],
+                //     ['skill_name' => $skill->name],
+                //     ['job_id' => $job->id]
+                // ]);
             };
         } else {
             dump("added no new skills");
