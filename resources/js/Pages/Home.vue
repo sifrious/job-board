@@ -9,7 +9,7 @@
                 <PrimaryButtonLg :href="'/jobs'" :active="false">
                     Browse Jobs
                 </PrimaryButtonLg>
-                <PrimaryButtonLg :href="'/login-prompt'" :active="false">
+                <PrimaryButtonLg :href="'/prompt'" :active="false">
                     Post Job
                 </PrimaryButtonLg>
             </div>

@@ -8,5 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <LoginForm :canResetPassword="canResetPassword"></LoginForm>
+    <LoginForm :canResetPassword="canResetPassword">
+        <slot />
+    </LoginForm>
 </template>

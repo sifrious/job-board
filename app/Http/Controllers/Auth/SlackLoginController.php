@@ -21,6 +21,7 @@ class SlackLoginController extends Controller
 
     public function handleSlackCallback()
     {
+        session(['slack_data' => null]);
         try {
             $slack_user = Socialite::driver('slack')->user();
             $slack_data = [
@@ -32,8 +33,15 @@ class SlackLoginController extends Controller
             ];
         } catch (Exception $e) {
             $slack_data = null;
-            return to_route("auth-error", ["error-type" => 'response']);
+            session(['slack_error' => 'null_response']);
+            return to_route("auth-error");
         };
+
+
+        $org_id = config('slack.id');
+        $org_name = config('slack.name');
+        $slack_data['expected'] = ["id"=>$org_id, "name"=>$org_name];
+        session(['slack_data' => $slack_data]);
 
         // append + flatten team data 
         try {
@@ -41,11 +49,9 @@ class SlackLoginController extends Controller
             $slack_data["team_name"] = $slack_user["team"]["name"];
             $slack_data["team_domain"] = $slack_user["team"]["domain"];
         } catch (Exception $e) {
+            session(['slack_error' => 'team']);
             return to_route("auth-error", ["error-type" => 'team']);
         };
-
-        $org_id = config('slack.id');
-        $org_name = config('slack.name');
 
         if ($org_id === $slack_data["team_id"]) {
             $user = User::where([
@@ -57,7 +63,8 @@ class SlackLoginController extends Controller
                 return to_route('login.slack');
             };
         } else {
-            return to_route("auth-error", ["error-type" => 'team-match']);
+            session(['slack_error' => 'team-match']);
+            return to_route("auth-error");
         };
     }
 
@@ -82,9 +89,11 @@ class SlackLoginController extends Controller
 
     public function update(Request $request): Response
     {
+        $slack_data = session('slack_data');
         return Inertia::render('Auth/LoginSlack', [
             'CanResetPassword' => true,
             'status' => "This slack account is already associated with an account",
+            'slack_data' => $slack_data,
         ]);
     }
 
