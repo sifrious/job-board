@@ -13,6 +13,6 @@ class LoginPromptController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('prompt', []);
+        return Inertia::render('Prompt', []);
     }
 }

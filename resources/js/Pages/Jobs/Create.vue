@@ -12,7 +12,7 @@ import Layout from '../Shared/layout.vue';
 import PrimaryButtonLg from '@/Components/PrimaryButtonLg.vue';
 // import Status from '@/Components/Status.vue';
 // import JobCreateLayout from '@/Layouts/JobCreateLayout.vue';
-import {Head} from '@inertiajs/vue3';
+import {Head} from '@inertiajs/inertia-vue3';
 
 export default {
     props: {

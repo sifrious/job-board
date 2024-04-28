@@ -2,7 +2,7 @@
 
 // 
 import { ref } from 'vue'
-import { useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/inertia-vue3';
 import OptionalInputLabel from '@/Forms/Components/OptionalInput.vue'
 import InputError from '@/Components/InputError.vue'; 
 import InputLabel from '@/Components/InputLabel.vue';

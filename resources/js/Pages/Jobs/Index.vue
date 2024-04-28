@@ -9,7 +9,7 @@
 
 <script>
 import Layout from '@/Shared/layout.vue';
-import {useForm, Head} from '@inertiajs/vue3';
+import {useForm, Head} from '@inertiajs/inertia-vue3';
 import Info from './Components/Info.vue';
 import List from './Components/List.vue';
 

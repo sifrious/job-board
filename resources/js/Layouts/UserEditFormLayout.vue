@@ -1,6 +1,6 @@
 <script setup>
 import LoginForm from '@/Forms/LoginForm.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 
 defineProps({
     canResetPassword: {
