@@ -21,7 +21,7 @@ class JobController extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('Jobs/Index', ['user' => Auth::user()]);
+        return inertia('Jobs/Index', ['user' => Auth::user()]);
     }
 
     /**
@@ -30,17 +30,12 @@ class JobController extends Controller
     public function create()
     {
         session(['redirect_path' => '/jobs/new']);
-        // $session_path = session('redirect_path');
-        // $session_info = session()->all();
-        // dump($session_info);
-        // dump($session_path);
-        // dd();
         $user = Auth::user() ?: null;
         if (is_null($user)) {
             return Redirect('/home');
         }
 
-        return Inertia::render('Jobs/Create', ['user' => Auth::user()]);
+        return inertia('Jobs/Create', ['user' => Auth::user()]);
     }
 
     /**

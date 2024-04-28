@@ -16,6 +16,6 @@ class DashboardRoutingController extends Controller
         if (!is_null($user_target)) {
             return redirect($user_target);
         };
-        return Inertia::render('Dashboard');
+        return inertia('Dashboard');
     }
 }

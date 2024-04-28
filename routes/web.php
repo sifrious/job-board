@@ -22,9 +22,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Home', [
-        'user' => Auth::user() ? Auth::user()->id : -1,
-        'failedSlackLogin' => false,
+    return inertia('Home', [
+        'user' => Auth::user(),
     ]);
 });
 

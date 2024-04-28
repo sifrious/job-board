@@ -1,31 +1,11 @@
-<script setup>
-import { Head, Link } from "@inertiajs/vue3";
-import NavigationTemplate from "@/Layouts/NavigationTemplate.vue";
-import PrimaryButtonLg from "@/Components/PrimaryButtonLg.vue"
-
-
-defineProps({
-    failedSlackLogin: {
-        type: Boolean,
-    },
-    user: {
-        type: Number,
-        required: true,
-    },
-});
-</script>
-
 <template>
-    <Head title="Welcome" />
-    <NavigationTemplate :home="true" :user="-1"></NavigationTemplate>
-    <div class="flex justify-center pt-10 text-center">
-        <div class="w-full md:px md:w-4/5 lg:3/5 text-center">
-            <div class="mx-14">
-                <span class="text-4xl">
-                    Find Work and Talent Through NEPA's Premiere Tech Community
-                </span>
-            </div>
-            <div class="flex flex-row flex-wrap p-10 justify-center">
+    <Layout :user="user" class="h-screen">
+        <div class="relative flex flex-col justify-center text-center w-full h-2/3">
+            <span class="text-4xl">
+                Find Work and Talent Through NEPA's <br> 
+                <span class="font-bold text-5xl">Premiere Tech Community</span>
+            </span>
+            <div class="flex flex-row flex-wrap pt-12 justify-center">
                 <PrimaryButtonLg :href="'/jobs'" :active="false">
                     Browse Jobs
                 </PrimaryButtonLg>
@@ -34,7 +14,20 @@ defineProps({
                 </PrimaryButtonLg>
             </div>
         </div>
-    </div>
-    <div class="">
-    </div>
+    </Layout>
 </template>
+
+<script>
+import PrimaryButtonLg from "@/Components/PrimaryButtonLg.vue";
+import Layout from '../Shared/layout.vue';
+
+export default {
+    props: {
+        user: Object,
+    },
+    components: {
+        Layout,
+        PrimaryButtonLg,
+    }
+};
+</script>
