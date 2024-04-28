@@ -29,6 +29,8 @@ Route::middleware('guest')->group(function () {
 
     Route::post('login-slack', [SlackLoginController::class, 'update']);
 
+    Route::get('slack-error', [SlackLoginController::class, 'handleError'])->name('handle-error');
+
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
@@ -46,14 +48,9 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
 
-    Route::get('/auth/redirect', [SlackLoginController::class, 'redirectToSlack']);
+    Route::get('/auth/redirect', [SlackLoginController::class, 'redirectToSlack'])->name('slack-redirect');
 
-    Route::get('/auth/callback', [SlackLoginController::class, 'handleSlackCallback']);
-
-    Route::get('/auth/test', function () {
-        dd(config('services.slack'));
-        // dd(['config']['services.slack']);
-    });
+    Route::get('/auth/callback', [SlackLoginController::class, 'handleSlackCallback'])->name('slack-callback');
 });
 
 Route::middleware('auth')->group(function () {

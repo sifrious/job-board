@@ -22,13 +22,13 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home', [
         'user' => Auth::user() ? Auth::user()->id : -1,
         'failedSlackLogin' => false,
     ]);
 });
 
-Route::get('/welcome', [LoginPromptController::class, 'index'])->name('welcome');
+Route::get('/login-prompt', [LoginPromptController::class, 'index'])->name('login-prompt');
 
 Route::get('/jobs', [JobController::class, 'index']);
 Route::get('/jobs/new', [JobController::class, 'create']);

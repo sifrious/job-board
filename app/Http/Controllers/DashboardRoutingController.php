@@ -13,11 +13,9 @@ class DashboardRoutingController extends Controller
     public function __invoke()
     {
         $user_target = session('redirect_path') ?: null;
-        session(['redirect_path' => null]);
         if (!is_null($user_target)) {
             return redirect($user_target);
         };
-        dd("hit invokable container");
         return Inertia::render('Dashboard');
     }
 }

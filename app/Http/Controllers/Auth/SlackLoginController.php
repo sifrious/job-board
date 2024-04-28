@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Inertia\Inertia;
 use Inertia\Response;
+use Inertia\Ssr\Response as SsrResponse;
 use Laravel\Socialite\Facades\Socialite;
 
 class SlackLoginController extends Controller
@@ -20,9 +21,8 @@ class SlackLoginController extends Controller
 
     public function handleSlackCallback()
     {
-        $slack_user = Socialite::driver('slack')->user();
-
         try {
+            $slack_user = Socialite::driver('slack')->user();
             $slack_data = [
                 'id' => $slack_user->id,
                 'nickname' => $slack_user->nickname,
@@ -32,9 +32,7 @@ class SlackLoginController extends Controller
             ];
         } catch (Exception $e) {
             $slack_data = null;
-            dump($e);
-            dd("no slack data recieved");
-            // TODO EARLY RETURN
+            return to_route("auth-error", ["error-type" => 'response']);
         };
 
         // append + flatten team data 
@@ -43,17 +41,13 @@ class SlackLoginController extends Controller
             $slack_data["team_name"] = $slack_user["team"]["name"];
             $slack_data["team_domain"] = $slack_user["team"]["domain"];
         } catch (Exception $e) {
-            dump($e);
-            dd("no team data recieved");
-            // TODO EARLY RETURN
+            return to_route("auth-error", ["error-type" => 'team']);
         };
 
         $org_id = config('slack.id');
         $org_name = config('slack.name');
 
-        if ($org_id === $slack_data["team_id"] && $org_name === $slack_data["team_name"]) {
-            // matches
-            session(['slack_data' => $slack_data]);
+        if ($org_id === $slack_data["team_id"]) {
             $user = User::where([
                 ['slack_id', "=", $slack_data["id"]],
             ])->first();
@@ -63,8 +57,7 @@ class SlackLoginController extends Controller
                 return to_route('login.slack');
             };
         } else {
-            // doesn't match
-            return to_route('welcome', ['failedSlackLogin' => true]);
+            return to_route("auth-error", ["error-type" => 'team-match']);
         };
     }
 
@@ -92,6 +85,13 @@ class SlackLoginController extends Controller
         return Inertia::render('Auth/LoginSlack', [
             'CanResetPassword' => true,
             'status' => "This slack account is already associated with an account",
+        ]);
+    }
+
+    public function handleError(Request $request, str $errorType): Response
+    {
+        return Inertia::render('/', [
+            'error-type' => $errorType,
         ]);
     }
 }

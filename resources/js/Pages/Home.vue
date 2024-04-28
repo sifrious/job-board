@@ -29,7 +29,7 @@ defineProps({
                 <PrimaryButtonLg :href="'/jobs'" :active="false">
                     Browse Jobs
                 </PrimaryButtonLg>
-                <PrimaryButtonLg :href="'/login'" :active="false">
+                <PrimaryButtonLg :href="'/login-prompt'" :active="false">
                     Post Job
                 </PrimaryButtonLg>
             </div>

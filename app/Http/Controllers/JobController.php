@@ -37,7 +37,7 @@ class JobController extends Controller
         // dd();
         $user = Auth::user() ?: null;
         if (is_null($user)) {
-            return Redirect('/welcome');
+            return Redirect('/home');
         }
 
         return Inertia::render('Jobs/Create', ['user' => Auth::user()]);
@@ -83,7 +83,7 @@ class JobController extends Controller
                     ['job_id' => $job->id]
                 ]);
             };
-        } else {`
+        } else {
             dump("added no new skills");
         };
         // Add listing information
