@@ -50,7 +50,6 @@ class SlackLoginController extends Controller
             $slack_data["team_name"] = $slack_team["name"];
             $slack_data["team_domain"] = $slack_team["domain"];
         } catch (Exception $e) {
-            dump($e);
             session(['slack_error' => $e]);
         };
 
@@ -76,12 +75,10 @@ class SlackLoginController extends Controller
         if (!is_null($slack_data)) {
             $slack_id = session('slack_data')["id"];
             $user = User::where(['slack_id', "=", $slack_id])->first();
-            dump($slack_id);
-            dump($user);
             if (!is_null($user)) {
-                dd("okokok");
+                dump("found user already");
+                dump($user);
             } else {
-                // dd("here");
                 return Inertia::render('Auth/RegisterSlack', ['slack_data' => session('slack_data')]);
             }
         } else {

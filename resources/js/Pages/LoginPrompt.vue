@@ -13,7 +13,7 @@
                 <div class="flex w-11/12 md:w-5/6 p-auto">Job Posts are limited to users authenticated by logging into a Slack account associated with NEPA Tech.</div>
             </div>
             <div class="w-full">
-                <a :href="'/auth/redirect'" class="flex justify-center text-center" data-visit="true">
+                <a href="'/auth/redirect'" class="flex justify-center text-center" data-visit="true">
                     <div class="m-4 w-1/2 border-2 border-grey-800 rounded-lg bg-gray-200 text-lg font-bold">
                         Login With Slack
                     </div>

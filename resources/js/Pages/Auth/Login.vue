@@ -1,6 +1,6 @@
 <script setup>
 import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import layout from '@/Shared/layout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -30,12 +30,21 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <layout>
         <Head title="Log in" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
+        <div v-else class="mb-4 font-medium text-sm">
+            <h1 class="hidden">Log In</h1>
+            <span class="font-bold text-xl">Welcome back</span>
+            <br><br> Enter your details here or
+            <Link href="'/auth/redirect'" class="underline bg-purple-50 hover:bg-purple-200 font-bold p-1">login using the slack account</Link>
+            you use to with NEPA tech. Or
+            <Link href="/register" class="underline bg-purple-50 hover:bg-purple-200 font-bold p-1">Create An Account</Link>.
+
+        </div> 
 
         <form @submit.prevent="submit">
             <div>
@@ -90,5 +99,5 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-    </GuestLayout>
+    </layout>
 </template>
