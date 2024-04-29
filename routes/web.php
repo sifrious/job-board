@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutMembershipController;
+use App\Http\Controllers\AboutPricingController;
 use App\Http\Controllers\DashboardRoutingController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginPromptController;
@@ -30,7 +32,10 @@ Route::get('/', function () {
 Route::get('/prompt', [LoginPromptController::class, 'index'])->name('prompt');
 
 Route::get('/jobs', [JobController::class, 'index']);
-Route::get('/jobs/new', [JobController::class, 'create']);
+Route::get('/jobs/new', [JobController::class, 'create']); 
+
+Route::get('/about/membership', AboutMembershipController::class)->name('membership');
+Route::get('/about/pricing', AboutPricingController::class)->name('pricing');
 
 Route::get('/dashboard', DashboardRoutingController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
