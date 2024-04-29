@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Firm;
 use App\Models\Job;
+use App\Models\JobSkill;
 use App\Models\Listing;
+use App\Models\Skill;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -68,10 +71,10 @@ class JobController extends Controller
         dump($job);
         // Add organization based on job form
         if (!is_null($request->organization)) {
-            // $firm = Firm::firstOrCreate([
-            //     ['name' => $request->organization]
-            // ]);
-            // dump($firm);
+            $firm = Firm::firstOrCreate([
+                ['name' => $request->organization]
+            ]);
+            dump($firm);
         } else {
             dump("did not create firm");
         };
@@ -80,14 +83,14 @@ class JobController extends Controller
             $skills = explode(",", $request->skills);
             foreach ($skills as $skill_str) {
                 $skill_str = str_replace(" ", "", $skill_str);
-                // $skill = Skill::firstOrCreate([
-                //     ['name' => $skill],
-                // ]);
-                // $job_skill = JobSkill::firstOrCreate([
-                //     ['skill_id' => $skill->id],
-                //     ['skill_name' => $skill->name],
-                //     ['job_id' => $job->id]
-                // ]);
+                $skill = Skill::firstOrCreate([
+                    ['name' => $skill_str],
+                ]);
+                $job_skill = JobSkill::firstOrCreate([
+                    ['skill_id' => $skill->id],
+                    ['skill_name' => $skill->name],
+                    ['job_id' => $job->id]
+                ]);
             };
         } else {
             dump("added no new skills");
