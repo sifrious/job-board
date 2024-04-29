@@ -12,6 +12,8 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\SlackLoginController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/auth/error', [SlackLoginController::class, 'handleError'])->name('authError');
+
 Route::middleware('guest')->group(function () {
 
     Route::get('register-slack', [SlackLoginController::class, 'create'])
