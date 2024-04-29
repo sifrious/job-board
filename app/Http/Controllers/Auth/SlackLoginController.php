@@ -42,6 +42,9 @@ class SlackLoginController extends Controller
         $org_name = config('slack.name');
         $slack_data['expected'] = ["id"=>$org_id, "name"=>$org_name];
         session(['slack_data' => $slack_data]);
+        $user = User::where('slack_id', '=', $slack_user->id)->firstOrFail();
+        dump($user);
+        dump($slack_data);
 
         // append + flatten team data 
         try {

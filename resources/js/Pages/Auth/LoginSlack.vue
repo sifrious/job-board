@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <LoginFormLayout :canResetPassword="canResetPassword">
+        <LoginFormLayout :canResetPassword="canResetPassword" :email="slack_data.email">
             <Status :status="status" :title="'Log In'"></Status>
         </LoginFormLayout>
     </layout>
