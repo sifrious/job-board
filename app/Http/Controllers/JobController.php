@@ -31,7 +31,7 @@ class JobController extends Controller
                                 ->latest()
                                 ->limit(20)
                                 ->get();
-        }
+        };
         return inertia('Jobs/Index', ['user' => $user, 'jobs' => $jobs, 'user_jobs' => $user_jobs]);
     }
 

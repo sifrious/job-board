@@ -1,12 +1,12 @@
 <template>
-    <div class="border-2 border-rose-200 text-center">
+    <div class="border bg-stone-50 text-center">
         Looks like 
-        <span v-if="per_user">
-            <span v-if="plural">you haven't made any</span>
+        <span v-if="per_user==true">
+            <span v-if="plural==true">you haven't created any</span>
             <span v-else>you don't have a</span>
         </span>
         <span v-else>
-            <span v-if="plural">there aren't any</span>
+            <span v-if="plural==true">there aren't any</span>
             <span v-else>there isn't a</span>
         </span>
         {{ display_type }} yet.
