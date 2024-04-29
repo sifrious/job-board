@@ -43,13 +43,6 @@ class JobController extends Controller
      */
     public function create()
     {
-        session(['redirect_path' => '/jobs/new']);
-        $user = Auth::user() ?: null;
-        if (is_null($user)) {
-            return Redirect('/home');
-        }
-
-        return inertia('Jobs/Create', ['user' => Auth::user()]);
     }
 
     /**
@@ -68,7 +61,6 @@ class JobController extends Controller
             'skills' => $request->skills ?: null,
             'remaining_available' => 1,
         ]);
-        dump($job);
         // Add organization based on job form
         if (!is_null($request->organization)) {
             $firm = Firm::firstOrCreate([
