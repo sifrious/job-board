@@ -1,7 +1,7 @@
 <template>
     <Head title="Profile" />
 
-    <layout>
+    <layout :user="user">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>
         </template>

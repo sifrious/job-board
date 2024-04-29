@@ -1,14 +1,16 @@
 <template>
     <Head title="Jobs" />
-    <layout :user=user>
-        <Info :jobs="user_jobs" :user="user"></Info>
-        <List :jobs="jobs"></List>
-    </layout>
+    <LayoutUnaltered :user=user>
+        <div class="mt-20">
+            <Info :list_items="user_jobs" :user="user" display_type="Job Listings"></Info>
+            <List :list_items="jobs" display_type="Job Listings"></List>
+        </div>
+    </LayoutUnaltered>
 
 </template>
 
 <script>
-import layout from '@/Shared/layout.vue';
+import LayoutUnaltered from '@/Shared/LayoutUnaltered.vue';
 import {useForm, Head} from '@inertiajs/inertia-vue3';
 import Info from './Components/Info.vue';
 import List from './Components/List.vue';
@@ -21,7 +23,7 @@ export default {
         user_jobs: Object,
     },
     components: {
-        layout,
+        LayoutUnaltered,
         Head,
         Info,
         List,

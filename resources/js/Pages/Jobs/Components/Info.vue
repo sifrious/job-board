@@ -1,12 +1,11 @@
 <template>
-    user is {{ user }}
     <PermanentInfoContainer>
         <div v-if="user">
-            <div v-if="jobs.length > 0">
-                <InfoCount :jobs="jobs"></InfoCount>
+            <div v-if="list_items.length > 0">
+                <InfoCount :list_items="jobs" :user="user"></InfoCount>
             </div>
             <div v-else>
-                <InfoNone :plural="true" :per_user="true" display_type="Jobs"></InfoNone>
+                <InfoNone :plural="true" :per_user="true" display_type="Job Listings"></InfoNone>
             </div>
         </div>
     </PermanentInfoContainer>
@@ -19,8 +18,9 @@
 
     export default {
         props: {
-            jobs: String,
             user: Object,
+            list_items: Object || None,
+            display_type: String,
         },
         components: {
             InfoCount,

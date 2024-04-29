@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutMembershipController;
 use App\Http\Controllers\AboutPricingController;
 use App\Http\Controllers\DashboardRoutingController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\LoginPromptController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserListingController;
@@ -32,7 +33,6 @@ Route::get('/', function () {
 Route::get('/prompt', [LoginPromptController::class, 'index'])->name('prompt');
 
 Route::get('/jobs', [JobController::class, 'index']);
-Route::get('/jobs/new', [JobController::class, 'create']); 
 
 Route::get('/about/membership', AboutMembershipController::class)->name('membership');
 Route::get('/about/pricing', AboutPricingController::class)->name('pricing');
@@ -44,8 +44,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('/jobs/create', [JobController::class, 'store'])->name('jobs.create');
-    Route::get('/user/jobs', [UserListingController::class, 'index'])->name('userlisting.index')->name('user.jobs');
+    Route::post('/jobs/new', [ListingController::class, 'create'])->name('listings.create');
+    Route::get('/user/jobs', [UserJobsController::class, 'index'])->name('userjobs.index');
+    Route::get('/user/listings', [UserListingController::class, 'index'])->name('userlistings.index');
+    Route::post('/user/drafts', [UserDraftsController::class, 'index'])->name('userdrafts.index');
+    Route::post('/user/leads', [UserLeadsController::class, 'index'])->name('userleads.index');
 });
 
 require __DIR__ . '/auth.php';

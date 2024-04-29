@@ -1,5 +1,5 @@
 <template>
-    <div class="border bg-stone-50 text-center">
+    <div class="border bg-stone-50 text-center p-3">
         Looks like 
         <span v-if="per_user==true">
             <span v-if="plural==true">you haven't created any</span>
