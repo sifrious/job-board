@@ -52,7 +52,7 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/auth/redirect', [SlackLoginController::class, 'redirectToSlack'])->name('slack-redirect');
 
-    Route::get('/auth/callback', [SlackLoginController::class, 'handleSlackCallback'])->name('slack-callback');
+    Route::get('/auth/callback', [SlackLoginController::class, 'handleSlackCallback']);
 });
 
 Route::middleware('auth')->group(function () {

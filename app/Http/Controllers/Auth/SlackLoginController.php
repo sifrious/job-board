@@ -34,29 +34,28 @@ class SlackLoginController extends Controller
         } catch (Exception $e) {
             $slack_data = null;
             session(['slack_error' => 'null_response']);
-            return to_route("auth-error");
+            return to_route("authError");
         };
-
 
         $org_id = config('slack.id');
         $org_name = config('slack.name');
         $slack_data['expected'] = ["id"=>$org_id, "name"=>$org_name];
+        // add slack response to session data
         session(['slack_data' => $slack_data]);
-        $user = User::where('slack_id', '=', $slack_user->id)->firstOrFail();
-        dump($user);
-        dump($slack_data);
 
         // append + flatten team data 
         try {
-            $slack_data["team_id"] = $slack_user["team"]["id"];
-            $slack_data["team_name"] = $slack_user["team"]["name"];
-            $slack_data["team_domain"] = $slack_user["team"]["domain"];
+            $slack_team  = $slack_user["team"];
+            $slack_data["team_id"] = $slack_team["id"];
+            $slack_data["team_name"] = $slack_team["name"];
+            $slack_data["team_domain"] = $slack_team["domain"];
         } catch (Exception $e) {
-            session(['slack_error' => 'team']);
-            return to_route("auth-error", ["error-type" => 'team']);
+            dump($e);
+            session(['slack_error' => $e]);
         };
 
         if ($org_id === $slack_data["team_id"]) {
+            // get user from slack response
             $user = User::where([
                 ['slack_id', "=", $slack_data["id"]],
             ])->first();
@@ -67,7 +66,7 @@ class SlackLoginController extends Controller
             };
         } else {
             session(['slack_error' => 'team-match']);
-            return to_route("auth-error");
+            return to_route("authError");
         };
     }
 
@@ -100,10 +99,13 @@ class SlackLoginController extends Controller
         ]);
     }
 
-    public function handleError(Request $request, str $errorType): Response
+    public function handleError(Request $request): Response
     {
-        return Inertia::render('/', [
-            'error-type' => $errorType,
+        $errorType = session(['slack_error']);
+        $slackData = session(['slack_data']);
+        return Inertia::render('Auth/AuthError', [
+            'error_type' => $errorType,
+            'slackData' => $slackData,
         ]);
     }
 }
