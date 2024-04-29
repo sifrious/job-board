@@ -92,7 +92,7 @@ class SlackLoginController extends Controller
         $slack_data = session('slack_data');
         return Inertia::render('Auth/LoginSlack', [
             'CanResetPassword' => true,
-            'status' => "This slack account is already associated with an account",
+            'status' => "This slack account is already associated with a profile on NEPA Jobs Board",
             'slack_data' => $slack_data,
         ]);
     }

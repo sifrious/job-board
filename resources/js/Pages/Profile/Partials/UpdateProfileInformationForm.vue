@@ -1,25 +1,27 @@
 <script setup>
+import { ref } from 'vue';
+import { Link, useForm, usePage } from '@inertiajs/inertia-vue3';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/inertia-vue3';
 
-defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
+// Props
+const props = defineProps({
+  mustVerifyEmail: Boolean,
+  status: String,
 });
 
-const user = usePage().props.auth.user;
+// Using Inertia.js hooks to get page information
+const page = usePage();
+const user = ref(page.props.value.auth?.user || { name: '', email: '' });
 
+// Reactive form state
 const form = useForm({
-    name: user.name,
-    email: user.email,
+  name: user.value.name,
+  email: user.value.email,
 });
+
 </script>
 
 <template>
