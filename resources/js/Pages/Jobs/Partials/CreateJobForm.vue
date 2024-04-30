@@ -35,14 +35,6 @@ const form = useForm({
 
 <template>
     <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">Job Information</h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                Please describe the position you'd like to fill.
-            </p>
-        </header>
-
         <form @submit.prevent="form.post(route('listing.store'))" class="mt-6 space-y-6">
             
             <!-- Job Name -->
@@ -54,7 +46,6 @@ const form = useForm({
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.name"
-                    required
                     autofocus
                     autocomplete="name"
                 />
@@ -86,7 +77,6 @@ const form = useForm({
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.organization"
-                    required
                 />
 
                 <InputError class="mt-2" :message="form.errors.organization" />
@@ -112,7 +102,6 @@ const form = useForm({
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.url"
-                    required
                 />
 
                 <InputError class="mt-2" :message="form.errors.url" />
@@ -127,7 +116,6 @@ const form = useForm({
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.description"
-                    required
                 />
 
                 <InputError class="mt-2" :message="form.errors.description" />
@@ -142,7 +130,6 @@ const form = useForm({
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.location_address"
-                    required
                 />
 
                 <InputError class="mt-2" :message="form.errors.location_address" />
@@ -157,7 +144,6 @@ const form = useForm({
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.skills"
-                    required
                 />
                 <InputError class="mt-2" :message="form.errors.skills" />
             </div>
@@ -174,7 +160,6 @@ const form = useForm({
                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
                 </Transition>
             </div>
-
         </form>
     </section>
 </template>

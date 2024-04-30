@@ -22,6 +22,7 @@
 import LoginFormLayout from '@/Layouts/LoginFormLayout.vue';
 import Status from '@/Components/Status.vue';
 import layout from "@/Shared/layout.vue";
+import RegistrationForm from '@/Forms/RegistrationForm.vue';
 
 export default { 
     props: {
@@ -38,7 +39,8 @@ export default {
     components: {
         LoginFormLayout,
         Status,
-        layout
+        layout,
+        RegistrationForm,
     },
 };
 </script>
