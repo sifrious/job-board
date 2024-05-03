@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <RadioGroup v-model="plan">
       <RadioGroupLabel>Plan</RadioGroupLabel>
       <RadioGroupOption v-slot="{ checked }" value="startup">
@@ -13,13 +13,19 @@
     </RadioGroup>
   </template>
   
-  <script setup>
-    import { ref } from 'vue'
+  <script>
+    import { ref, watch } from 'vue';
     import {
       RadioGroup,
       RadioGroupLabel,
       RadioGroupOption,
-    } from '@headlessui/vue'
+    } from '@headlessui/vue';
+
+    export default {
+      props: {
+        "this is not done and should throw an error",
+      }
+    }
   
     const plan = ref('startup')
-  </script>
+  </script> -->

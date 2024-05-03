@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('title');
             $table->string('organization')->nullable();
             $table->string('contact')->nullable();
@@ -22,6 +23,10 @@ return new class extends Migration
             $table->string('url_secondary')->nullable();
             $table->string('url_tertiary')->nullable();
             $table->string('url_linkedin')->nullable();
+            $table->string('url_label')->nullable();
+            $table->string('url_secondary_label')->nullable();
+            $table->string('url_tertiary_label')->nullable();
+            $table->string('url_linkedin_label')->nullable();
             $table->string('description')->nullable();
             $table->string('position_level')->nullable();
             $table->string('location_type')->nullable();

@@ -35,7 +35,7 @@ const form = useForm({
 
 <template>
     <section>
-        <form @submit.prevent="form.post(route('listing.store'))" class="mt-6 space-y-6">
+        <form @submit.prevent="form.post(route('{{submitPath}}'))" class="mt-6 space-y-6">
             
             <!-- Job Name -->
             <div>

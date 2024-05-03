@@ -10,6 +10,7 @@ class Job extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'title',
         'organization',
         'contact',
@@ -19,9 +20,14 @@ class Job extends Model
         'url_secondary',
         'url_tertiary',
         'url_linkedin',
+        'url_label',
+        'url_secondary_label',
+        'url_tertiary_label',
+        'url_linkedin_label',
         'description',
         'position_level',
         'location_type',
+        'location_address',
         'commitment_type',
         'salary_range_min',
         'salary_range_max',

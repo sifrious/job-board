@@ -1,6 +1,7 @@
 <template>
-    <header class="absolute inset-x-0 top-0 z-50 flex h-16 border-b border-gray-900/10">
-        <NavLogo></NavLogo>
+    <header class="absolute inset-x-0 top-0 z-50 flex h-16 border-b border-gray-900/10 bg-stone-50">
+        <NavLogo>
+        </NavLogo>
         <UserSection :user="user">
         </UserSection>
         <!-- Mobile menu, show/hide based on menu open state. -->
@@ -32,8 +33,8 @@
 </template>
 
 <script>
-import navGroup from './navGroup.vue';
-import navGroupMobile from './navGroupMobile.vue';
+// import navGroup from './navGroup.vue';
+// import navGroupMobile from './navGroupMobile.vue';
 import UserSection from './UserSection.vue';
 import NavLogo from './NavLogo.vue';
 
@@ -42,8 +43,6 @@ export default {
         user: Object,
     },
     components: {
-        navGroup,
-        navGroupMobile,
         NavLogo,
         UserSection,
     }

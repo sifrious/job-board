@@ -1,9 +1,7 @@
 <template>
     <Layout :user=user :home="true">
         <Status :title="'New Job Listing'">
-            </Status>
-        <!-- <JobCreateLayout :user="user">
-        </JobCreateLayout> -->
+        </Status>
         <CreateJobForm></CreateJobForm>
     </Layout>
 </template>

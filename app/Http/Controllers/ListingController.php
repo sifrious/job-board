@@ -33,7 +33,6 @@ class ListingController extends Controller
         if (is_null($user)) {
             return Redirect('/home');
         }
-
         return inertia('Listings/Create', ['user' => Auth::user()]);
     }
 
@@ -44,26 +43,29 @@ class ListingController extends Controller
     {
         //
         $user = Auth::user();
+        $form_content = $request->all();
         $magic_date = Carbon::create(1970, 1, 1, 0, 0, 1);
         $job = Job::create([
-            'title' => $request->title,
-            'organization' => $request->organization ?: null,
-            'url' => $request->url ?: null,
-            'description' => $request->description ?: null,
-            'location_address' => $request->location_address ?: null,
-            'skills' => $request->skills ?: null,
+            'name' => $form_content['name'],
+            'title' => $form_content['title'],
+            'organization' => $form_content['organization'] ?: null,
+            'url' => $form_content['url'] ?: null,
+            'description' => $form_content['description'] ?: null,
+            'location_address' => $form_content['location_address'] ?: null,
+            'skills' => $form_content['skills'] ?: null,
             'remaining_available' => 1,
         ]);
+        dd($job);
         // Add organization based on job form
-        if (!is_null($request->organization)) {
+        if (!is_null($form_content['organization'])) {
             $firm = Firm::firstOrNew([
-                ['name' => $request->organization],
+                ['name' => $form_content['organization']],
             ]);
             $firm->save();
         };
         // Add skills from job form
-        if (!is_null($request->skills)) {
-            $skills = explode(",", $request->skills);
+        if (!is_null($form_content['skills'])) {
+            $skills = explode(",", $form_content['skills']);
             foreach ($skills as $skill_str) {
                 $skill_str = str_replace(" ", "", $skill_str);
                 $skill = Skill::firstOrNew([
@@ -78,17 +80,14 @@ class ListingController extends Controller
                 $job_skill->save();
             };
         };
+        $listing = null;
         // Add listing information
-        $listing = Listing::create([
-            'user_represents_organization' => true,
-            'creator_id' => $user->id,
-            'owner_id' => $user->id,
-            'preferred_contact' => $user->id,
-            'is_active' => $request->is_active ?: null,
-            'is_published' => $request->is_published,
-            'published_date' => $request->published_date ?: null,
-            'removed_date' => $magic_date,
-        ]);
+        // $listing = Listing::create([
+        //     'user_represents_organization' => true,
+        //     'creator_id' => $user->id,
+        //     'owner_id' => $user->id,
+        //     'preferred_contact' => $user->id,
+        // ]);
         if ($listing) {
             return redirect('listing.show', [$listing->id]);
         };

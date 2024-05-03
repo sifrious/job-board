@@ -48,7 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/job/new', [ListingController::class, 'create'])->name('listing.create');
+    Route::get('/jobs/new', [ListingController::class, 'create'])->name('listing.create');
     Route::post('/job/new', [ListingController::class, 'store'])->name('listing.store');
+    Route::post('/jobs/new', [ListingController::class, 'store'])->name('listing.store');
     
     Route::get('/user/jobs', [UserJobsController::class, 'index'])->name('userjobs.index');
     Route::get('/user/listings', [UserListingController::class, 'index'])->name('userlistings.index');
