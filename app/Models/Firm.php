@@ -10,9 +10,4 @@ class Firm extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
-
-    public function create(Request $request) {
-        
-        return $firm;
-    }
 }

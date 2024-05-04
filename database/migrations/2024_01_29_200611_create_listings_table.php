@@ -17,11 +17,11 @@ return new class extends Migration
             $table->integer('owner_role')->nullable();
             $table->integer('creator_id')->references('id')->on('users');
             $table->integer('preferred_contact')->reference('id')->on('users');
-            $table->boolean('user_represents_organization');
+            $table->boolean('user_represents_organization')->default(false);
             $table->boolean('is_active')->default(false);
             $table->boolean('is_published')->default(false);
-            $table->dateTime('published_date');
-            $table->dateTime('removed_date');
+            $table->dateTime('published_date')->nullable();
+            $table->dateTime('removed_date')->nullable();
             $table->timestamps('');
         });
     }

@@ -11,6 +11,7 @@ use App\Models\Listing;
 use App\Models\Skill;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ListingController extends Controller
 {
@@ -44,54 +45,44 @@ class ListingController extends Controller
         //
         $user = Auth::user();
         $form_content = $request->all();
-        $magic_date = Carbon::create(1970, 1, 1, 0, 0, 1);
-        $job = Job::create([
+
+        $listing = Listing::create([
+            'user_represents_organization' => true,
+            'creator_id' => $user->id,
+            'owner_id' => $user->id,
+            'preferred_contact' => $user->id,
+        ]);
+
+        $job = $listing->jobs()->create([
             'name' => $form_content['name'],
             'title' => $form_content['title'],
             'organization' => $form_content['organization'] ?: null,
             'url' => $form_content['url'] ?: null,
             'description' => $form_content['description'] ?: null,
             'location_address' => $form_content['location_address'] ?: null,
-            'skills' => $form_content['skills'] ?: null,
             'remaining_available' => 1,
         ]);
-        dd($job);
+
         // Add organization based on job form
-        if (!is_null($form_content['organization'])) {
-            $firm = Firm::firstOrNew([
-                ['name' => $form_content['organization']],
+        if (!is_null($form_content['organization']) && ! Firm::where('name', $form_content['organization'])->exists()) {
+            Firm::create([
+                'name' => $form_content['organization'],
             ]);
-            $firm->save();
-        };
+        }
+
         // Add skills from job form
         if (!is_null($form_content['skills'])) {
             $skills = explode(",", $form_content['skills']);
+
             foreach ($skills as $skill_str) {
-                $skill_str = str_replace(" ", "", $skill_str);
-                $skill = Skill::firstOrNew([
-                    ['name' => $skill_str],
-                ]);
-                $skill->save();
-                $job_skill = JobSkill::firstOrNew([
-                    ['skill_id' => $skill->id],
-                    ['skill_name' => $skill->name],
-                    ['job_id' => $job->id]
-                ]);
-                $job_skill->save();
+                $skill_str = Str::slug($skill_str);
+                $skill = Skill::firstOrCreate(['name' => $skill_str]);
+
+                $job->skills()->attach($skill);
             };
         };
-        $listing = null;
-        // Add listing information
-        // $listing = Listing::create([
-        //     'user_represents_organization' => true,
-        //     'creator_id' => $user->id,
-        //     'owner_id' => $user->id,
-        //     'preferred_contact' => $user->id,
-        // ]);
-        if ($listing) {
-            return redirect('listing.show', [$listing->id]);
-        };
-        return redirect('userListing.index');
+
+        return to_route('userjobs.index');
     }
 
     /**
