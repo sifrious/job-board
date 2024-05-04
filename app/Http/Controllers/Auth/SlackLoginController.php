@@ -75,15 +75,10 @@ class SlackLoginController extends Controller
         if (!is_null($slack_data)) {
             $slack_id = session('slack_data')["id"];
             $user = User::where(['slack_id', "=", $slack_id])->first();
-            if (!is_null($user)) {
-                dump("found user already");
-                dump($user);
-            } else {
+            if (is_null($user)){
                 return Inertia::render('Auth/RegisterSlack', ['slack_data' => session('slack_data')]);
-            }
-        } else {
-            dd("failed slack auth");
-        }
+            };
+        };
     }
 
     public function update(Request $request): Response
