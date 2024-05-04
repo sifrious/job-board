@@ -31,36 +31,17 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // override slack nickname
-        $nickname = '';
-        if (!empty($request->nickname)) {
-            $nickname = $request->nickname;
-        } elseif (!empty($request->slack_nickname)) {
-            $nickname = $request->slack_nickname;
-        }
-
-        if ($request->role === '') {
-            $role = 'demo';
-        } else {
-            $role = 'nepatech';
-        }
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'slack_nickname' => $nickname,
-            'slack_id' => $request->slack_id,
-            'slack_email' => $request->slack_email,
-            'slack_avatar' => $request->slack_avatar,
-            'slack_name' => $request->slack_name,
-            'role' => $role,
+            'slack_nickname' => $request->nickname,
+            'role' => 'demo', // because logging in via regular register we assume demo role
             'membership' => 'alpha',
             'password' => Hash::make($request->password),
         ]);
