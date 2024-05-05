@@ -1,7 +1,7 @@
 <template>
     <LayoutUnaltered :user="user" class="h-screen mt-22 fixed">
         <div class="flex flex-row h-screen w-screen">
-            <FormWrap :user="user" submitPath="listing.create" class="w-full">
+            <FormWrap :user="user" submitPath="listing.store" class="w-full">
             </FormWrap>
         </div>
     </LayoutUnaltered>

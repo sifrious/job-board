@@ -1,24 +1,25 @@
 <template>
-    <Head title="Dashboard" />
-
-    <layout :user="user">
-        <!-- <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        </template> -->
-    </layout>
+    <Head title="Dashboard | NEPA Tech Jobs" />
+    <LayoutUnaltered :user="user">
+        <DashboardLayout :user="user" :listings="listings" :jobs="jobs"></DashboardLayout>
+    </LayoutUnaltered>
 </template>
 
 <script>
-import layout from '@/Shared/layout.vue';
+import LayoutUnaltered from '@/Shared/LayoutUnaltered.vue';
 import { Head } from '@inertiajs/inertia-vue3';
+import DashboardLayout from '@/Shared/DashboardLayout.vue';
 
 export default {
     props: {
-        user: Object
+        user: Object,
+        listings: Object,
+        jobs: Object,
     },
     components: {
-        layout,
         Head,
+        LayoutUnaltered,
+        DashboardLayout,
     },
 };
 </script>
