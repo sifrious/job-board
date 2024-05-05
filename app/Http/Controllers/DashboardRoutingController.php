@@ -17,10 +17,11 @@ class DashboardRoutingController extends Controller
     public function __invoke(Request $request)
     {
         $user = $request->user();
+        $listings = $user->get_listings_array();
         return inertia('Dashboard', [
             'user' => $user,
-            'listings'=> $user->get_all_listings(),
-            'jobs' => $user->jobs(),
+            'listings'=> $listings,
+            'jobs' => $user->jobs_array($listings),
         ]);
     }
 }

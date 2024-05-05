@@ -1,7 +1,9 @@
 <template>
-    <tr>
-        {{ listing }}
-    </tr>
+    <th scope="colgroup" colspan="3" class="relative isolate py-2 font-semibold">
+        TITLE
+        <div class="absolute inset-y-0 right-full -z-10 w-screen border-b border-gray-200 bg-gray-50"></div>
+        <div class="absolute inset-y-0 left-0 -z-10 w-screen border-b border-gray-200 bg-gray-50"></div>
+    </th>
     <tr>
         <td class="relative py-5 pr-6">
             <div class="flex gap-x-6">
@@ -33,9 +35,4 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            listing: Object,
-        },
-    };
 </script>

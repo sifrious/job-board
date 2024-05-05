@@ -4,13 +4,15 @@
       :active_listings_count="active_listings_count"
       :jobs_count="jobs_count"
       :drafts_count="drafts_count"
-      :leads_count="all_leads"
+      :leads_count="0"
       :listings_count="listings_count"
     ></DashboardSummary>
     <!-- Summary -->
-    <div class="space-y-16 py-16 xl:space-y-20">
+    <div class="w-full">
       <!-- Recent activity table -->
-      <!-- <ListingsSummaryTable :jobs="jobs" :listings="listings"> </ListingsSummaryTable> -->
+      <ListingsSummaryTable 
+        :jobs="jobs"
+        :listings="listings"> </ListingsSummaryTable>
       Recent Activity Container
       <!-- <ListingsSummaryContainer :listings="listings"></ListingsSummaryContainer> -->
 
@@ -32,9 +34,8 @@
       listings: Object,
   });
 
-  const active_listings_count = computed(() => props.listings.active.all.length);
+  const active_listings_count = computed(() => props.listings.active.length);
   const jobs_count = computed(() => props.jobs.all.length);
   const drafts_count = computed(() => props.listings.all.drafts.length);
-  const all_leads = 0;
   const listings_count = computed(() => props.listings.all.all.length);
 </script>

@@ -3,6 +3,7 @@
     <LayoutUnaltered :user="user">
         <DashboardLayout :user="user" :listings="listings" :jobs="jobs"></DashboardLayout>
     </LayoutUnaltered>
+    {{ jobs }}
 </template>
 
 <script>
